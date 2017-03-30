@@ -82,12 +82,12 @@
     hasRowConflictAt: function(rowIndex) {
       return this.get(rowIndex).reduce(function(a, b) {
         return a + b;
-      }) >= 2; 
+      }, 0) >= 2; 
     },
 
     // test if any rows on this board contain conflicts
     hasAnyRowConflicts: function() {
-      return _(_.range(this.get('n'))).some((i) => Board.prototype.hasRowConflictAt.call(this, i));
+      return _(_.range(this.get('n'))).some((i) => this.hasRowConflictAt(i));
       //return this.hasRowConflictAt(0);
     },
 
@@ -102,12 +102,12 @@
         return row[colIndex];
       }).reduce(function(a, b){
         return a + b;
-      }) >= 2;
+      }, 0) >= 2;
     },
 
     // test if any columns on this board contain conflicts
     hasAnyColConflicts: function() {
-      return _(_.range(this.get('n'))).some((i) => Board.prototype.hasColConflictAt.call(this, i));
+      return _(_.range(this.get('n'))).some((i) => this.hasColConflictAt(i));
     },
 
 
@@ -126,7 +126,7 @@
         return 0;
       }).reduce(function(a, b) {
         return a + b;
-      }) >= 2;
+      }, 0) >= 2;
     },
 
     // test if any major diagonals on this board contain conflicts
@@ -159,7 +159,7 @@
           }
         }
         return 0;
-      }).reduce((a, b) => a + b) >= 2;
+      }).reduce((a, b) => a + b, 0) >= 2;
     },
 
     // test if any minor diagonals on this board contain conflicts

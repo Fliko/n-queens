@@ -38,6 +38,11 @@
           }).render()
         );
       };
+      window.getBoardElement = function(matrix){
+        return $(new BoardView({
+            model: new Board(matrix)
+          }).render());
+      };
       $(function(){
         // this is a pre-baked solution for n-queens in the n = 4 case, rendered to the screen using our handy visualizer.
         displayBoard([
@@ -48,7 +53,13 @@
         ]);
 
         var n = 4;
-        findNRooksSolution(n);
+        for(var n = 1; n <= 12; n++) {
+          var header = $('<h3>n = ' + n + ' No of sols: ' + countNQueensSolutions(n) + '</h3>');
+          var board = $(getBoardElement(findNQueensSolution(n)));
+          var elem = $('<div></div>').append(header).append(board);
+          $('body').append(elem);
+        }
+        displayBoarfindNRooksSolution(n);
         countNRooksSolutions(n);
         findNQueensSolution(n);
         countNQueensSolutions(n);
